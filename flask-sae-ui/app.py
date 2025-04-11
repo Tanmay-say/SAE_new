@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 import pandas as pd
 import pickle
 import tensorflow as tf
@@ -290,6 +290,177 @@ def generate_feedback(score):
         return "Needs improvement. Your answer is missing many key points."
     else:
         return "Your answer differs significantly from the expected response. Please review the material."
+
+@app.route('/game', methods=['GET', 'POST'])
+def game():
+    """Game page that allows users to answer questions in a quiz-like format."""
+    
+    # Initialize game state
+    if 'game_questions' not in session:
+        # Get 5 random questions for the game
+        game_questions = []
+        for _ in range(5):
+            q, a = get_random_question()
+            game_questions.append({'question': q, 'desired_answer': a})
+        session['game_questions'] = game_questions
+        session['current_question_idx'] = 0
+        session['total_score'] = 0
+        session['answered_current'] = False
+    
+    # Get current game state
+    game_questions = session['game_questions']
+    current_idx = session['current_question_idx']
+    total_score = session['total_score']
+    total_questions = len(game_questions)
+    
+    # Check if game is completed
+    if current_idx >= total_questions:
+        return render_template('game.html', 
+                              game_completed=True,
+                              total_score=total_score,
+                              total_questions=total_questions,
+                              current_question_num=total_questions)
+    
+    # Get current question
+    current_question = game_questions[current_idx]
+    question = current_question['question']
+    desired_answer = current_question['desired_answer']
+    
+    # Process POST requests
+    student_answer = ""
+    result = None
+    
+    if request.method == 'POST':
+        # Move to next question if requested and allowed
+        if request.form.get('next_question') and session.get('answered_current'):
+            session['current_question_idx'] = current_idx + 1
+            session['answered_current'] = False
+            # Return to the beginning of the route to handle the next question
+            return redirect(url_for('game'))
+        
+        # Process answer submission
+        if request.form.get('submit_answer'):
+            student_answer = request.form.get('student_answer', "")
+            
+            # Handle empty answer
+            if not student_answer.strip():
+                result = {
+                    'score': 0,
+                    'feedback': "You didn't provide an answer. Please try again."
+                }
+            else:
+                # Use the same evaluation logic as the demo route
+                student_processed = preprocess_text(student_answer)
+                desired_processed = preprocess_text(desired_answer)
+                
+                # Calculate similarity metrics
+                wmd_score = compute_wmd(student_processed, desired_processed)
+                cosine_sim = compute_cosine_similarity(student_processed, desired_processed)
+                
+                try:
+                    # Predict score using trained model
+                    seq = tokenizer.texts_to_sequences([student_processed])
+                    padded_seq = pad_sequences(seq, maxlen=MAX_LENGTH)
+                    predicted_score = model.predict(padded_seq, verbose=0)[0][0]
+                    predicted_score = max(0, min(predicted_score, 1))
+                except Exception:
+                    predicted_score = 0.5
+                
+                # Normalize and combine scores
+                wmd_normalized = (1 - min(wmd_score / 2, 1)) * 5
+                cosine_normalized = cosine_sim * 5
+                final_score = (0.6 * predicted_score * 5) + (0.4 * (wmd_normalized + cosine_normalized) / 2)
+                final_score = max(0, min(5, final_score))
+                
+                # Update total score
+                session['total_score'] = total_score + final_score
+                session['answered_current'] = True
+                
+                result = {
+                    'score': round(final_score, 2),
+                    'feedback': generate_feedback(final_score)
+                }
+    
+    return render_template('game.html',
+                          question=question,
+                          desired_answer=desired_answer,
+                          student_answer=student_answer,
+                          result=result,
+                          current_question_num=current_idx + 1,
+                          total_questions=total_questions,
+                          total_score=round(total_score, 2),
+                          game_completed=False)
+
+@app.route('/upload_csv', methods=['POST'])
+def upload_csv():
+    """Handle CSV file upload for custom questions."""
+    global df
+    
+    if 'csv_file' not in request.files:
+        return redirect(url_for('game'))
+    
+    file = request.files['csv_file']
+    
+    if file.filename == '':
+        return redirect(url_for('game'))
+    
+    if file and file.filename.endswith('.csv'):
+        try:
+            # Save the uploaded file temporarily
+            file_path = os.path.join(os.path.dirname(__file__), 'temp_upload.csv')
+            file.save(file_path)
+            
+            # Read the uploaded CSV
+            temp_df = pd.read_csv(file_path, 
+                                 encoding='utf-8',
+                                 on_bad_lines='skip',
+                                 engine='python')
+            
+            # Make column names consistent
+            temp_df.columns = temp_df.columns.str.strip().str.lower()
+            
+            # Check for required columns
+            required_columns = {"question", "desired_answer"}
+            missing_columns = required_columns - set(temp_df.columns)
+            
+            if missing_columns:
+                # Try to find similar column names
+                column_mapping = {}
+                for col in temp_df.columns:
+                    for req_col in missing_columns:
+                        if req_col in col.lower() or col.lower() in req_col:
+                            column_mapping[col] = req_col
+                
+                # Rename columns based on mapping
+                if column_mapping:
+                    temp_df = temp_df.rename(columns=column_mapping)
+                
+                # Check again after mapping
+                still_missing = required_columns - set(temp_df.columns)
+                if still_missing:
+                    # Clean up and return to game
+                    os.remove(file_path)
+                    return redirect(url_for('game'))
+            
+            # Replace the global dataframe with the uploaded one if valid
+            df = temp_df
+            
+            # Update the vectorizer with new data
+            if not df.empty:
+                global vectorizer
+                vectorizer = TfidfVectorizer()
+                vectorizer.fit(df["desired_answer"].dropna().tolist())
+            
+            # Clean up temp file
+            os.remove(file_path)
+            
+            # Reset the game with new questions
+            session.pop('game_questions', None)
+            
+        except Exception as e:
+            print(f"CSV upload error: {e}")
+    
+    return redirect(url_for('game'))
 
 if __name__ == '__main__':
     app.run(debug=True)
