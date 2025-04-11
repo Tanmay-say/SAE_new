@@ -179,6 +179,14 @@ def about():
 def demo():
     """Handles the demo page for evaluating answers."""
     
+    # Check if the Next Question button was clicked
+    if request.method == 'POST' and request.form.get('next_question'):
+        # Get a new random question
+        question, desired_answer = get_random_question()
+        session['question'] = question
+        session['desired_answer'] = desired_answer
+        return render_template('demo.html', question=question, desired_answer=desired_answer)
+    
     if 'question' not in session or 'desired_answer' not in session:
         question, desired_answer = get_random_question()
         session['question'] = question
