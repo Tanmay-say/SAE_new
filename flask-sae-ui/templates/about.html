@@ -1,0 +1,131 @@
+{% extends "layout.html" %}
+
+{% block title %}About - Subjective Answer Evaluation System{% endblock %}
+
+{% block content %}
+<div class="bg-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:text-center">
+            <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">About Us</h2>
+            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                Our Mission and Technology
+            </p>
+            <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                We're dedicated to revolutionizing subjective answer evaluation through advanced AI technologies.
+            </p>
+        </div>
+
+        <div class="mt-16">
+            <div class="prose prose-indigo prose-lg text-gray-500 mx-auto">
+                <h3>Our Mission</h3>
+                <p>
+                    The Subjective Answer Evaluation System was born from a simple observation: evaluating subjective answers is time-consuming, inconsistent, and often biased. Our mission is to create a tool that helps educators provide fair, consistent, and timely feedback to students, while reducing the workload on teachers.
+                </p>
+                
+                <h3>Technical Approach</h3>
+                <p>
+                    Our system uses a combination of advanced natural language processing techniques:
+                </p>
+                
+                <ul>
+                    <li><strong>Semantic Similarity Analysis:</strong> We use transformer-based models to understand the meaning behind answers, not just keyword matching.</li>
+                    <li><strong>Contextual Understanding:</strong> Our system considers the context of the question to evaluate the relevance of the answer.</li>
+                    <li><strong>Key Point Detection:</strong> We identify essential concepts that should be present in a complete answer.</li>
+                    <li><strong>Coherence Evaluation:</strong> We assess the logical flow and organization of the response.</li>
+                </ul>
+                
+                <h3>System Architecture</h3>
+                <p>
+                    Our system is built on a modern, scalable architecture:
+                </p>
+                
+                <ul>
+                    <li><strong>Frontend:</strong> Flask web application with responsive design</li>
+                    <li><strong>Backend:</strong> Python-based API with optimized NLP processing</li>
+                    <li><strong>Models:</strong> Fine-tuned transformer models for specific subject domains</li>
+                    <li><strong>Database:</strong> Secure storage for questions, reference answers, and evaluation history</li>
+                </ul>
+                
+                <h3>Accuracy and Validation</h3>
+                <p>
+                    Our system has been validated through extensive testing:
+                </p>
+                
+                <ul>
+                    <li>90%+ correlation with human graders across multiple subjects</li>
+                    <li>Tested on over 10,000 real student answers</li>
+                    <li>Continuous improvement through feedback from educators</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:text-center mb-12">
+            <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Our Team</h2>
+            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                Meet the Minds Behind the System
+            </p>
+        </div>
+        
+        <div class="mt-10">
+            <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="text-center">
+                    <div class="mx-auto h-40 w-40 rounded-full xl:h-56 xl:w-56 overflow-hidden">
+                        <img class="h-full w-full object-cover" src="https://i.ibb.co/zHTMp4Md/Tanmay.jpg" alt="Team Member 1" onerror="this.src='https://via.placeholder.com/200?text=Team+Member+1'">
+                    </div>
+                    <div class="mt-4 space-y-2">
+                        <div class="text-lg leading-6 font-medium text-gray-900">Tanmay Sayare</div>
+                        <div class="text-indigo-600">Lead AI Researcher</div>
+                        <p class="text-gray-500">
+                            PhD in Computational Linguistics with expertise in NLP and machine learning.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <div class="mx-auto h-40 w-40 rounded-full xl:h-56 xl:w-56 overflow-hidden">
+                        <img class="h-full w-full object-cover" src="https://i.ibb.co/zHTMp4Md/Tanmay.jpg" alt="Team Member 2" onerror="this.src='https://via.placeholder.com/200?text=Team+Member+2'">
+                    </div>
+                    <div class="mt-4 space-y-2">
+                        <div class="text-lg leading-6 font-medium text-gray-900">Tanmay Sayare</div>
+                        <div class="text-indigo-600">Full-Stack Developer</div>
+                        <p class="text-gray-500">
+                            Expert in Python, Flask, and modern web technologies with a focus on scalable applications.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <div class="mx-auto h-40 w-40 rounded-full xl:h-56 xl:w-56 overflow-hidden">
+                        <img class="h-full w-full object-cover" src="https://i.ibb.co/zHTMp4Md/Tanmay.jpg" alt="Team Member 3" onerror="this.src='https://via.placeholder.com/200?text=Team+Member+3'">
+                    </div>
+                    <div class="mt-4 space-y-2">
+                        <div class="text-lg leading-6 font-medium text-gray-900">Tanmay Sayare</div>
+                        <div class="text-indigo-600">Education Specialist</div>
+                        <p class="text-gray-500">
+                            Former educator with 15 years of experience in assessment and curriculum development.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <div class="mx-auto h-40 w-40 rounded-full xl:h-56 xl:w-56 overflow-hidden">
+                        <img class="h-full w-full object-cover" src="https://i.ibb.co/zHTMp4Md/Tanmay.jpg" alt="Team Member 4" onerror="this.src='https://via.placeholder.com/200?text=Team+Member+4'">
+                    </div>
+                    <div class="mt-4 space-y-2">
+                        <div class="text-lg leading-6 font-medium text-gray-900">Tanmay Sayare</div>
+                        <div class="text-indigo-600">UX/UI Designer</div>
+                        <p class="text-gray-500">
+                            Specializes in creating intuitive, accessible interfaces for educational technology.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

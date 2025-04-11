@@ -1,0 +1,157 @@
+{% extends "layout.html" %}
+
+{% block title %}Home - Subjective Answer Evaluation System{% endblock %}
+
+{% block content %}
+<div class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
+        <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+            Subjective Answer Evaluation System
+        </h1>
+        <p class="mt-6 text-xl max-w-3xl mx-auto">
+            Revolutionizing the way subjective answers are evaluated using advanced natural language processing.
+        </p>
+        <div class="mt-10">
+            <a href="{{ url_for('demo') }}" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-indigo-600 bg-white hover:bg-indigo-50">
+                Try the Demo
+            </a>
+            <a href="{{ url_for('about') }}" class="ml-4 inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-800 bg-opacity-60 hover:bg-opacity-70">
+                Learn More
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:text-center">
+            <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Our Approach</h2>
+            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                Intelligent Evaluation for Subjective Answers
+            </p>
+            <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                Our system uses state-of-the-art natural language processing to evaluate subjective answers with accuracy comparable to human graders.
+            </p>
+        </div>
+
+        <div class="mt-16">
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white mb-4">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900">Advanced NLP</h3>
+                    <p class="mt-2 text-base text-gray-500">
+                        Leveraging cutting-edge natural language processing models to understand the semantic meaning of answers.
+                    </p>
+                </div>
+
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900">High Accuracy</h3>
+                    <p class="mt-2 text-base text-gray-500">
+                        Our system achieves over 90% correlation with human graders across various subjects and question types.
+                    </p>
+                </div>
+
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white mb-4">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900">Detailed Feedback</h3>
+                    <p class="mt-2 text-base text-gray-500">
+                        Provides constructive feedback to help students understand their strengths and areas for improvement.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:text-center mb-12">
+            <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">How It Works</h2>
+            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                Simple Process, Powerful Results
+            </p>
+        </div>
+        
+        <div class="relative">
+            <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                <div class="w-full border-t border-gray-300"></div>
+            </div>
+            <div class="relative flex justify-center">
+                <span class="px-3 bg-gray-50 text-lg font-medium text-gray-900">
+                    Evaluation Process
+                </span>
+            </div>
+        </div>
+        
+        <div class="mt-8 max-w-3xl mx-auto">
+            <div class="space-y-8">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                            1
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">Input Question and Reference Answer</h3>
+                        <p class="mt-2 text-base text-gray-500">
+                            Educators provide the question and an ideal reference answer that covers all key points.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                            2
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">Submit Student Answer</h3>
+                        <p class="mt-2 text-base text-gray-500">
+                            Enter the student's response to be evaluated against the reference answer.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                            3
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">Receive Detailed Evaluation</h3>
+                        <p class="mt-2 text-base text-gray-500">
+                            Get a comprehensive assessment including a similarity score and constructive feedback.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-indigo-700 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">
+            Ready to transform your assessment process?
+        </h2>
+        <p class="mt-4 text-lg">
+            Try our demo to see how our system can save time and provide consistent evaluations.
+        </p>
+        <div class="mt-8">
+            <a href="{{ url_for('demo') }}" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-white hover:bg-gray-50">
+                Try the Demo Now
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

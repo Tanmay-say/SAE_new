@@ -1,0 +1,122 @@
+/* Additional custom styles beyond Tailwind CSS */
+
+/* Form elements styling */
+textarea,
+input {
+  border: 1px solid #e2e8f0;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  width: 100%;
+  font-size: 1rem;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+/* Smooth transitions */
+a,
+button {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c7d2fe;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6366f1;
+}
+
+/* Styling for random question display */
+.random-question {
+  background-color: #eef2ff;
+  padding: 1.2rem;
+  border-left: 5px solid #6366f1;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #4f46e5;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Desired answer display (only after submission) */
+.desired-answer {
+  background-color: #f8fafc;
+  padding: 1rem;
+  border-left: 4px solid #16a34a;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #065f46;
+  margin-top: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Feedback box styling */
+.feedback-box {
+  background-color: #fff;
+  padding: 1rem;
+  border-left: 4px solid #2563eb;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #1e3a8a;
+  margin-top: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Placeholder image styling */
+.placeholder-img {
+  background-color: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  font-size: 0.875rem;
+}
+
+/* Submit button styling */
+button {
+  background-color: #6366f1;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #4f46e5;
+  transform: translateY(-1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .random-question,
+  .desired-answer,
+  .feedback-box {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+
+  textarea {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+}
